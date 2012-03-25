@@ -15,6 +15,7 @@ SCONS_VERSION="1.2.0"
 S3_BUCKET="heroku-buildpack-nodejs"
 
 # parse and derive params
+BIN_DIR=$(cd $(dirname $0); pwd) # absolute path
 BUILD_DIR=$1
 CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
@@ -175,6 +176,9 @@ if [ -d $CACHE_STORE_DIR ]; then
   fi
 
 fi
+
+# libzmq support.
+source $BIN_DIR/steps/libzmq
 
 # install dependencies with npm
 echo "-----> Installing dependencies with npm"
