@@ -17,7 +17,7 @@ if [ ! -e "include/zmq.h" ]; then
   tar -zxvf tmp-libzmq.tar.gz > /dev/null
   rm tmp-libzmq.tar.gz
 
-  sed -i "s|/app/vendor/.*|`pwd`|" lib/pkgconfig/*.pc
+  sed -i "s|/tmp/compile_.*|`pwd`|" lib/pkgconfig/*.pc
 fi
 
 export PKG_CONFIG_PATH=$(pwd)/lib/pkgconfig:$PKG_CONFIG_PATH
