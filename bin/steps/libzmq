@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "-----> Entered steps file."
+
 # if zmq within requirements, use vendored libzmq
 if (grep -Fiq "zmq" $BUILD_DIR/package.json)
 then
