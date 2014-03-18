@@ -13,7 +13,7 @@ if [ ! -e "include/zmq.h" ]; then
   tar -zxvf tmp-uuid.tar.gz > /dev/null
   rm tmp-uuid.tar.gz
 
-  curl -s -L -o tmp-libzmq.tar.gz "https://api.anvilworks.org/slugs/ed2b5cc0-e039-410d-bc06-08fbedffb1b8.tgz"
+  curl -s -L -o tmp-libzmq.tar.gz "https://api.anvilworks.org/slugs/3db60da7-6bd6-4eaa-95e4-db113d84740d.tgz"
   tar -zxvf tmp-libzmq.tar.gz > /dev/null
   rm tmp-libzmq.tar.gz
 
