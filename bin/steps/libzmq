@@ -3,25 +3,22 @@
 echo "-----> Entered steps file."
 
 # if zmq within requirements, use vendored libzmq
-if (grep -Fiq "zmq" $BUILD_DIR/package.json)
-then
-    echo "-----> Noticed zmq. Bootstrapping libzmq."
-    
-    mkdir -p $BUILD_DIR/.heroku/vendor
-    pushd $BUILD_DIR/.heroku/vendor > /dev/null
+echo "-----> Noticed zmq. Bootstrapping libzmq."
 
-    if [ ! -e "include/zmq.h" ]; then
-      curl -s -L -o tmp-uuid.tar.gz "https://api.anvilworks.org/slugs/8def316f-08e8-4a10-960d-27f6118699c2.tgz"
-      tar -zxvf tmp-uuid.tar.gz > /dev/null
-      rm tmp-uuid.tar.gz
+mkdir -p $BUILD_DIR/.heroku/vendor
+pushd $BUILD_DIR/.heroku/vendor > /dev/null
 
-      curl -s -L -o tmp-libzmq.tar.gz "https://api.anvilworks.org/slugs/ed2b5cc0-e039-410d-bc06-08fbedffb1b8.tgz"
-      tar -zxvf tmp-libzmq.tar.gz > /dev/null
-      rm tmp-libzmq.tar.gz
+if [ ! -e "include/zmq.h" ]; then
+  curl -s -L -o tmp-uuid.tar.gz "https://api.anvilworks.org/slugs/8def316f-08e8-4a10-960d-27f6118699c2.tgz"
+  tar -zxvf tmp-uuid.tar.gz > /dev/null
+  rm tmp-uuid.tar.gz
 
-      sed -i "s|/app/vendor/.*|`pwd`|" lib/pkgconfig/*.pc
-    fi
+  curl -s -L -o tmp-libzmq.tar.gz "https://api.anvilworks.org/slugs/ed2b5cc0-e039-410d-bc06-08fbedffb1b8.tgz"
+  tar -zxvf tmp-libzmq.tar.gz > /dev/null
+  rm tmp-libzmq.tar.gz
 
-    export PKG_CONFIG_PATH=$(pwd)/lib/pkgconfig:$PKG_CONFIG_PATH
-    popd > /dev/null
+  sed -i "s|/app/vendor/.*|`pwd`|" lib/pkgconfig/*.pc
 fi
+
+export PKG_CONFIG_PATH=$(pwd)/lib/pkgconfig:$PKG_CONFIG_PATH
+popd > /dev/null
